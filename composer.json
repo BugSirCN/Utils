@@ -1,0 +1,21 @@
+{
+    "name": "bugsir/utils",
+    "description": "utils for bugsir project",
+    "type": "library",
+    "require": {
+        "php": "7.4.*"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Bugsir\\Utils\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Train Tsang",
+            "email": "zeng@imkd.net"
+        }
+    ],
+    "minimum-stability": "dev"
+}
