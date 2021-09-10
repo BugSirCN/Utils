@@ -129,7 +129,7 @@ class Product
      * 错误级别-error
      * @return $this
      */
-    public function error(): Product
+    public function levelError(): Product
     {
         $this->errorLevel = 'error';
         return $this;
@@ -139,7 +139,7 @@ class Product
      * 错误级别-warm
      * @return $this
      */
-    public function warn(): Product
+    public function levelWarn(): Product
     {
         $this->errorLevel = 'warn';
         return $this;
@@ -149,7 +149,7 @@ class Product
      * 错误级别-info
      * @return $this
      */
-    public function info(): Product
+    public function levelInfo(): Product
     {
         $this->errorLevel = 'info';
         return $this;
@@ -159,7 +159,7 @@ class Product
      * 错误级别-debug
      * @return $this
      */
-    public function debug(): Product
+    public function levelDebug(): Product
     {
         $this->errorLevel = 'debug';
         return $this;
