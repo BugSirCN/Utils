@@ -3,7 +3,9 @@
     "description": "utils for bugsir project",
     "type": "library",
     "require": {
-        "php": "7.4.*"
+        "php": "7.4.*",
+        "ext-redis": "*",
+      "ext-json": "*"
     },
     "license": "MIT",
     "autoload": {
