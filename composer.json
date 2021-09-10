@@ -17,5 +17,5 @@
             "email": "zeng@imkd.net"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
