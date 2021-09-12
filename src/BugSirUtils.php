@@ -7,6 +7,7 @@ use Bugsir\Utils\Log\Product;
 use Bugsir\Utils\Tools\Common;
 use Bugsir\Utils\Tools\Data;
 use Bugsir\Utils\Tools\File;
+use Bugsir\Utils\Tools\Time;
 use Bugsir\Utils\Tools\Url;
 
 class BugSirUtils
@@ -72,5 +73,10 @@ class Tools
     public static function url()
     {
         return new Url();
+    }
+
+    public static function time()
+    {
+        return new Time();
     }
 }
