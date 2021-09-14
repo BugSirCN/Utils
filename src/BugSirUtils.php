@@ -8,7 +8,7 @@ use Bugsir\Utils\Tools\Common;
 use Bugsir\Utils\Tools\Data;
 use Bugsir\Utils\Tools\File;
 use Bugsir\Utils\Tools\Time;
-use Bugsir\Utils\Tools\Url;
+use Bugsir\Utils\Tools\Request;
 
 class BugSirUtils
 {
@@ -34,7 +34,7 @@ class BugSirUtils
      */
     public static function tools()
     {
-
+        return new Tools();
     }
 }
 
@@ -72,7 +72,7 @@ class Tools
 
     public static function url()
     {
-        return new Url();
+        return new Request();
     }
 
     public static function time()

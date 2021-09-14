@@ -2,7 +2,7 @@
 
 namespace Bugsir\Utils\Tools;
 
-class Url
+class Request
 {
     /**
      * 获取协议类型
@@ -35,4 +35,5 @@ class Url
     {
         return $this->getProtocol() . $this->getHost() . $this->getParams();
     }
+
 }
