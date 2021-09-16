@@ -2,7 +2,9 @@
 
 namespace Bugsir\Utils\Connect;
 
-
+/**
+ * redis链接
+ */
 class Redis
 {
     protected \Redis $redisClass;
@@ -20,6 +22,8 @@ class Redis
     const ENUM_DB_SMS_AND_VERIFY = 14;//短信与认证库
     const ENUM_DB_LOG = 15;//日志库
 
+    protected static $instancePool = [];//实例池子
+
     public function __construct()
     {
         $this->redisClass = new \Redis();
@@ -36,36 +40,67 @@ class Redis
         $this->pConnect = false;
     }
 
-    public function setIndex($index): Redis
+    /**
+     * 库
+     * @param int $index
+     * @return $this
+     */
+    public function setIndex(int $index): Redis
     {
         $this->index = $index;
         return $this;
     }
 
-    public function setHost($host): Redis
+    /**
+     * @param string $host
+     * @return $this
+     */
+    public function setHost(string $host): Redis
     {
         $this->host = $host;
         return $this;
     }
 
-    public function setPort($port): Redis
+    /**
+     * 端口
+     * @param int $port
+     * @return $this
+     */
+    public function setPort(int $port): Redis
     {
         $this->port = $port;
         return $this;
     }
 
-    public function setPassword($password): Redis
+    /**
+     * 密码
+     * @param string $password
+     * @return $this
+     */
+    public function setPassword(string $password): Redis
     {
-        $this->password = $password;
+        if (!empty($password)){
+            $this->password = $password;
+        }
         return $this;
     }
 
-    public function setTimeout($timeout): Redis
+    /**
+     * 超时时间
+     * @param int $timeout
+     * @return $this
+     */
+    public function setTimeout(int $timeout): Redis
     {
         $this->timeout = $timeout;
         return $this;
     }
 
+    /**
+     * 是否是长连接
+     * @param bool $pConnect
+     * @return $this
+     */
     public function setPConnect(bool $pConnect): Redis
     {
         $this->pConnect = $pConnect;
@@ -74,6 +109,7 @@ class Redis
 
     /**
      * TODO[T]检查长链接时，向多个库存入数据时，是否会只存到最后一个库
+     * TODO[M]增加一个instance的方法，帮助使用者防止重复实例化（同一个IP、port、index视为一个实例）
      * @link https://blog.csdn.net/fenglailea/article/details/78685965
      */
     public function startConnect(): \Redis
@@ -89,6 +125,8 @@ class Redis
         $this->redisClass->select($this->index);
         //$redis->setOption($redis::OPT_SERIALIZER, $redis::SERIALIZER_IGBINARY);
 
+
+        //恢复默认值
         $this->_initConfig();
 
         return $this->redisClass;
