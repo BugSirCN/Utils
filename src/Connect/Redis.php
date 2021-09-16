@@ -15,12 +15,13 @@ class Redis
     protected int $timeout;
     protected bool $pConnect;
 
-    const ENUM_DB_DEFAULT = 0;
-    const ENUM_DB_SERVER = 1;//后端服务库（存储各服务运行、鉴权相关参数）
-    const ENUM_DB_CACHE = 10;//缓存库
-    const ENUM_DB_LOCK = 13;//全局锁库
-    const ENUM_DB_SMS_AND_VERIFY = 14;//短信与认证库
-    const ENUM_DB_LOG = 15;//日志库
+    const ENUM_INDEX_DEFAULT = 0;
+    const ENUM_INDEX_SERVER = 1;//后端服务库（存储各服务运行、鉴权相关参数）
+    const ENUM_INDEX_SESSION = 10;//会话库
+    const ENUM_INDEX_SMS_AND_VERIFY = 11;//短信与认证库
+    const ENUM_INDEX_CACHE = 12;//缓存库
+    const ENUM_INDEX_LOCK = 13;//全局锁库
+    const ENUM_INDEX_LOG = 15;//日志库
 
     protected static $instancePool = [];//实例池子
 
@@ -32,7 +33,7 @@ class Redis
 
     protected function _initConfig()
     {
-        $this->index = self::ENUM_DB_DEFAULT;
+        $this->index = self::ENUM_INDEX_DEFAULT;
         $this->host = '127.0.0.1';
         $this->port = 6379;
         $this->timeout = 5;

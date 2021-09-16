@@ -179,8 +179,9 @@ class Product
      */
     public function toRedis($queueName = 'ErrorLog', Redis $redisConnect = null)
     {
+        //如果没有指定redis连接，使用默认值
         if (is_null($redisConnect)) {
-            $redisConnect = BugSirUtils::connect()::redis()->setIndex(Redis::ENUM_DB_LOG)->startConnect();
+            $redisConnect = BugSirUtils::connect()::redis()->setIndex(Redis::ENUM_INDEX_LOG)->startConnect();
         }
         $res = $redisConnect->lPush($queueName . '::' . $this->errorLevel);
         $this->unsetParam();
