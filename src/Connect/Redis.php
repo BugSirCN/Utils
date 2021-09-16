@@ -33,7 +33,7 @@ class Redis
 
     protected function _initConfig()
     {
-        $this->index = self::ENUM_INDEX_DEFAULT;
+        $this->index = static::ENUM_INDEX_DEFAULT;
         $this->host = '127.0.0.1';
         $this->port = 6379;
         $this->timeout = 5;

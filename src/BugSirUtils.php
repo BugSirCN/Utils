@@ -3,7 +3,7 @@
 namespace Bugsir\Utils;
 
 use Bugsir\Utils\Connect\Redis;
-use Bugsir\Utils\Log\Product;
+use Bugsir\Utils\Log\Producer;
 use Bugsir\Utils\Tools\Common;
 use Bugsir\Utils\Tools\Data;
 use Bugsir\Utils\Tools\File;
@@ -24,9 +24,9 @@ class BugSirUtils
     /**
      * 日志
      */
-    public static function logSave(): Product
+    public static function logSave(): Producer
     {
-        return new Product();
+        return new Producer();
     }
 
     /**

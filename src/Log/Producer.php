@@ -8,26 +8,26 @@ use Bugsir\Utils\Connect\Redis;
 /**
  * 日志生产方
  */
-class Product
+class Producer
 {
-    const ALERT_NO = 0;//不报警
-    const ALERT_CALL = 1;//电话报警
-    const ALERT_SMS = 2;//短信报警
-    const ALERT_DING_TALK = 11;//钉钉报警
-    const ALERT_WORK_WECHAT = 12;//企业微信报警
-    const ALERT_TELEGRAM = 13;//电报报警
+
 
     protected string $errorLevel = 'error';
     protected array $param = [];
+
+    public function __construct()
+    {
+
+    }
 
     /**
      * 设置-错误信息
      * @param string $msg 错误信息
      * @return $this
      */
-    public function setErrorMsg($msg): Product
+    public function setErrorMsg(string $msg): Producer
     {
-        $this->param['msg'] = $msg;
+        $this->param[EnumParams::MSG] = $msg;
         return $this;
     }
 
@@ -36,9 +36,9 @@ class Product
      * @param int $code 错误码
      * @return $this
      */
-    public function setErrorCode($code): Product
+    public function setErrorCode(int $code): Producer
     {
-        $this->param['code'] = $code;
+        $this->param[EnumParams::CODE] = $code;
         return $this;
     }
 
@@ -48,11 +48,11 @@ class Product
      * @param int|null $line 行号
      * @return $this
      */
-    public function setPosition($filename, $line = null): Product
+    public function setPosition(string $filename, ?int $line = null): Producer
     {
-        $this->param['filename'] = $filename;
+        $this->param[EnumParams::FILENAME] = $filename;
         if (!is_null($line)) {
-            $this->param['line'] = $line;
+            $this->param[EnumParams::LINE] = $line;
         }
         return $this;
     }
@@ -62,9 +62,9 @@ class Product
      * @param string $sql
      * @return $this
      */
-    public function setLastSql($sql): Product
+    public function setLastSql(string $sql): Producer
     {
-        $this->param['lsatSql'] = $sql;
+        $this->param[EnumParams::LAST_SQL] = $sql;
         return $this;
     }
 
@@ -73,9 +73,9 @@ class Product
      * @param array|object $data
      * @return $this
      */
-    public function setData($data): Product
+    public function setData($data): Producer
     {
-        $this->param['data'] = json_encode($data, JSON_UNESCAPED_UNICODE);
+        $this->param[EnumParams::DATA] = json_encode($data, JSON_UNESCAPED_UNICODE);
         return $this;
     }
 
@@ -85,11 +85,11 @@ class Product
      * @param null|int|string $idType ID类型名称
      * @return $this
      */
-    public function setId($id, $idType = null): Product
+    public function setId($id, $idType = null): Producer
     {
-        $this->param['id'] = $id;
+        $this->param[EnumParams::ID] = $id;
         if (!is_null($idType)) {
-            $this->param['idType'] = $idType;
+            $this->param[EnumParams::ID_TYPE] = $idType;
         }
         return $this;
     }
@@ -99,9 +99,9 @@ class Product
      * @param array|object $trace
      * @return $this
      */
-    public function setTrace($trace): Product
+    public function setTrace($trace): Producer
     {
-        $this->param['trace'] = json_encode($trace, JSON_UNESCAPED_UNICODE);
+        $this->param[EnumParams::TRACE] = json_encode($trace, JSON_UNESCAPED_UNICODE);
         return $this;
     }
 
@@ -109,9 +109,9 @@ class Product
      * 设置报警模式（可以同时多个）
      * @param int|array $mode
      */
-    public function setAlert($mode = self::ALERT_NO): Product
+    public function setAlert($mode = EnumAlertType::ALERT_NO): Producer
     {
-        $this->param['alert'] = $mode;
+        $this->param[EnumParams::ALERT_MODE] = $mode;
         return $this;
     }
 
@@ -119,9 +119,9 @@ class Product
      * 错误级别-fatal
      * @return $this
      */
-    public function levelFatal(): Product
+    public function levelFatal(): Producer
     {
-        $this->errorLevel = 'fatal';
+        $this->errorLevel = EnumLevel::FATAL;
         return $this;
     }
 
@@ -129,9 +129,9 @@ class Product
      * 错误级别-error
      * @return $this
      */
-    public function levelError(): Product
+    public function levelError(): Producer
     {
-        $this->errorLevel = 'error';
+        $this->errorLevel = EnumLevel::ERROR;
         return $this;
     }
 
@@ -139,9 +139,9 @@ class Product
      * 错误级别-warm
      * @return $this
      */
-    public function levelWarn(): Product
+    public function levelWarn(): Producer
     {
-        $this->errorLevel = 'warn';
+        $this->errorLevel = EnumLevel::WARN;
         return $this;
     }
 
@@ -149,9 +149,9 @@ class Product
      * 错误级别-info
      * @return $this
      */
-    public function levelInfo(): Product
+    public function levelInfo(): Producer
     {
-        $this->errorLevel = 'info';
+        $this->errorLevel = EnumLevel::INFO;
         return $this;
     }
 
@@ -159,9 +159,9 @@ class Product
      * 错误级别-debug
      * @return $this
      */
-    public function levelDebug(): Product
+    public function levelDebug(): Producer
     {
-        $this->errorLevel = 'debug';
+        $this->errorLevel = EnumLevel::DEBUG;
         return $this;
     }
 
